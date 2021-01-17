@@ -1,5 +1,5 @@
 # Manually added files
-app/myenv/
+disaster_venv/
 .DS_Store
 models/classifier.pkl
 
