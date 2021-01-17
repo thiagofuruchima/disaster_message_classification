@@ -2,6 +2,7 @@ import json
 import plotly
 import pandas as pd
 
+import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 
@@ -12,7 +13,7 @@ import joblib
 from sqlalchemy import create_engine
 
 # Download the necessary corpus
-nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
+# nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 
 app = Flask(__name__)
 
