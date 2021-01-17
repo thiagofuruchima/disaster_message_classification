@@ -1,6 +1,7 @@
-# Virtual environments files
+# Manually added files
 app/myenv/
 .DS_Store
+models/classifier.pkl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
