@@ -11,10 +11,13 @@ from plotly.graph_objs import Bar
 import joblib
 from sqlalchemy import create_engine
 
+# Download the necessary corpus
+nltk.download(['punkt', 'wordnet', 'averaged_perceptron_tagger'])
 
 app = Flask(__name__)
 
 def tokenize(text):
+    """ Function to handle the messages and return the clean tokens """
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -37,8 +40,9 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/')
 @app.route('/index')
 def index():
-    
- 
+    """ Function to handle the default requests. This is the entry point to the Web App.
+        All necessary Home page visualizations should be implemented here.
+    """
     categories = df.iloc[:,4:].sum().sort_values(ascending=False)
     category_names = list(categories.index.str.title().str.replace('_', ' '))
     category_counts = list(categories)
@@ -103,6 +107,9 @@ def index():
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
+    """ Function to handle message processing. The messages will be handled
+    by the ML pipeline defined by model """
+
     # save user input in query
     query = request.args.get('query', '') 
 
@@ -119,6 +126,7 @@ def go():
 
 
 def main():
+    """ Wrapper function for the Web App inicialization """
     app.run(host='0.0.0.0', port=3001, debug=True)
 
 

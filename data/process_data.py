@@ -40,8 +40,9 @@ def clean_data(df):
     categories.columns = category_colnames
     
     for column in categories:
-        # set each value to be the last character of the string
-        categories[column] = categories[column].str[-1]
+        # set each value to be either 0 or 1
+        categories[column] = (categories[column].str[-1]=='0').map({True:0,
+                                                                    False:1})
         
         # convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])    
@@ -65,7 +66,7 @@ def save_data(df, database_filename):
     engine = create_engine('sqlite:///'+database_filename)
     
     # save the given DataFrame to the database as table "CLEAN_MESSAGES"
-    df.to_sql('CLEAN_MESSAGES', engine, index=False)
+    df.to_sql('CLEAN_MESSAGES', engine, index=False, if_exists = 'replace')
 
 
 def main():
