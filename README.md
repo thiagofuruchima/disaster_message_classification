@@ -7,14 +7,13 @@ A ML tool for classifying messages related to natural disasters.
 1. [Project Motivation](#motivation)
 2. [Installation](#installation)
 3. [File Descriptions](#files)
-4. [Results](#results)
-5. [Licensing, Authors, and Acknowledgements](#licensing)
+4. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ## Project Motivation<a name="motivation"></a>
 
 This project uses Data Pipelines, Natural Language Processing (NLP) Pipelines and Machine Learning Pipelines to build a message classification Web App.
 
-The WebApp classifies messages on 36 categories, as being which could help better address a disaster response.
+The Web App classifies messages on 36 different categories which could help better address a disaster response.
 
 Similar approuches could be used for many domain specific problems, like "crime related messages", "job applications", etc.
 
