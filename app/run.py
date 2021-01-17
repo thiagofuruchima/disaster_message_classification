@@ -38,38 +38,64 @@ model = joblib.load("../models/classifier.pkl")
 @app.route('/index')
 def index():
     
-    # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+ 
+    categories = df.iloc[:,4:].sum().sort_values(ascending=False)
+    category_names = list(categories.index.str.title().str.replace('_', ' '))
+    category_counts = list(categories)
+
     genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
+    genre_names = list(genre_counts.index.str.title())
+
+    related_percentage = (df['related']>0).mean().round(2)*100
+    related_counts = [related_percentage, 100-related_percentage]
+    related_names = ['Related', 'Non Related']
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
+                    x=category_names,
+                    y=category_counts
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Top Categories',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Category"
                 }
             }
-        }
+        },
+
+        {
+            'data': [
+                Bar(
+                    x=related_names,
+                    y=related_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Percentage of Messages Disaster Related',
+                'yaxis': {
+                    'title': "Percentage"
+                },
+                'xaxis': {
+                    'title': "Related x Non Related"
+                },
+                'color': '[Red, Blue]'
+            }
+        },
     ]
-    
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    
+
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
