@@ -2,9 +2,6 @@
 
 A ML tool for classifying messages related to natural disasters.
 
-
-A statistical inference study about brazilian high school students using 2019 ENEM dataset.
-
 ### Table of Contents
 
 1. [Project Motivation](#motivation)
@@ -24,7 +21,8 @@ Similar approuches could be used for many domain specific problems, like "crime 
 ## Installation <a name="installation"></a>
 
 This project uses the following libraries:
- - pandas, json, plotly, nltk, flask, joblib, sqlalchemy, sklearn.
+
+pandas, json, plotly, nltk, flask, joblib, sqlalchemy, sklearn.
  
 To run the WebApp, follow these steps:
 
